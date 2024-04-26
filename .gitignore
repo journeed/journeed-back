@@ -1,2 +1,4 @@
 projectenv/
 .env/
+venv
+delete_migrations.py
