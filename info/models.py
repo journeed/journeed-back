@@ -1,6 +1,18 @@
 from django.db import models
 from services.mixin import DateMixin
 from phonenumber_field.modelfields import PhoneNumberField
+from services.uploader import Uploader
+
+
+class HomeInfo(DateMixin):
+    head = models.CharField(max_length=200)
+    first_content = models.TextField(null=True, blank=True)
+    second_content = models.TextField(null=True, blank=True)
+    home_background = models.ImageField(upload_to=Uploader.head_background_uploader)
+    home_banner = models.ImageField(upload_to=Uploader.head_background_uploader)
+
+    def __str__(self):
+        return "Home Info"
 
 
 class AboutInfo(DateMixin):

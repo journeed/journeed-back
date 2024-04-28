@@ -1,9 +1,17 @@
 from rest_framework import generics
-from .models import AboutInfo, DifferentInfo, SocialMedia, ContactInfo, Contact
-from .serializers import AboutInfoSerializer, DifferentInfoSerializer, SocialMediaSerializer, ContactInfoSerializer, ContactSerializer
+from .models import HomeInfo, AboutInfo, DifferentInfo, SocialMedia, ContactInfo, Contact
+from .serializers import HomeInfoSerializer, AboutInfoSerializer, DifferentInfoSerializer, SocialMediaSerializer, ContactInfoSerializer, ContactSerializer
 from rest_framework.response import Response
 from django.conf import settings
 from django.core.mail import send_mail
+
+
+class HomeInfoView(generics.RetrieveAPIView):
+    queryset = HomeInfo.objects.all()
+    serializer_class = HomeInfoSerializer
+
+    def get_object(self):
+        return self.queryset.first()
 
 
 class AboutInfoView(generics.RetrieveAPIView):

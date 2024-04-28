@@ -1,6 +1,12 @@
 from rest_framework import serializers
 import re
-from .models import AboutInfo, DifferentInfo, SocialMedia, ContactInfo, Contact
+from .models import HomeInfo, AboutInfo, DifferentInfo, SocialMedia, ContactInfo, Contact
+
+
+class HomeInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HomeInfo
+        fields = "__all__"
 
 
 class AboutInfoSerializer(serializers.ModelSerializer):
