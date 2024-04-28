@@ -9,7 +9,10 @@ class HomeInfo(DateMixin):
     first_content = models.TextField(null=True, blank=True)
     second_content = models.TextField(null=True, blank=True)
     home_background = models.ImageField(upload_to=Uploader.head_background_uploader)
-    home_banner = models.ImageField(upload_to=Uploader.head_background_uploader)
+    home_banner = models.TextField()
+    home_banner_background = models.ImageField(upload_to=Uploader.head_background_uploader)
+
+
 
     def __str__(self):
         return "Home Info"
