@@ -24,4 +24,3 @@ class CodeGenerator:
         new_code = cls.code_slug_generator(size=size)
         qs_exists = model_.objects.filter(slug=new_code).exists()
         return cls.create_slug_shortcode(size, model_) if qs_exists else new_code
-

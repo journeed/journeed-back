@@ -11,7 +11,6 @@ django-cleanup==8.1.0
 django-cors-headers==4.3.1
 django-countries==7.6.1
 django-debug-toolbar==4.3.0
-django-environ==0.11.2
 django-filter==24.2
 django-guardian==2.4.0
 django-phonenumber-field==7.3.0
