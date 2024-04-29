@@ -1,2 +1,8 @@
 projectenv/
 .env/
+venv
+delete_migrations.py
+db.sqlite3
+.env
+.idea
+env-example
