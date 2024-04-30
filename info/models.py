@@ -12,8 +12,6 @@ class HomeInfo(DateMixin):
     home_banner = models.TextField()
     home_banner_background = models.ImageField(upload_to=Uploader.head_background_uploader)
 
-
-
     def __str__(self):
         return "Home Info"
 
