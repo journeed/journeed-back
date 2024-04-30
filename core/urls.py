@@ -4,6 +4,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("user/", include("user.urls")),
+    path('info-api/', include('info.urls')),
 ]
 
 from django.conf import settings

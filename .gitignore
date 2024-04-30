@@ -1,8 +1,11 @@
 projectenv/
 .env/
-venv
+.idea/
+venv/
+.venv/
+media/
+.env
 delete_migrations.py
 db.sqlite3
-.env
-.idea
 env-example
+manage.py
