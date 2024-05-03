@@ -1,3 +1,4 @@
+from .models import Profile
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -7,7 +8,13 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 User = get_user_model()
 
 
+class ProfileInline(admin.TabularInline):
+    model = Profile
+    extra = 1
+
+
 class UserAdmin(BaseUserAdmin):
+    inlines = (ProfileInline,)
 
     list_display = (
         "email",
@@ -27,7 +34,6 @@ class UserAdmin(BaseUserAdmin):
                     "country",
                     "mobile",
                     "password",
-                    "logo",
                 )
             },
         ),
