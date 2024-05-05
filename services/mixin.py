@@ -7,3 +7,11 @@ class DateMixin(models.Model):
 
     class Meta:
         abstract = True
+
+
+class SlugMixin(models.Model):
+    slug = models.SlugField(unique=True, editable=False)
+    code = models.SlugField(unique=True, editable=False)
+
+    class Meta:
+        abstract = True
