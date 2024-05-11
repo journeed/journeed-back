@@ -1,14 +1,17 @@
-from .models import Car, CarImage, CarCategory, Steering, Fuel
+from .models import (
+    Car, CarImage, CarCategory, Steering, Fuel, CarReview
+)
 from rest_framework import generics
 from services.pagination import CarListPagination
 from django.db.models import F, FloatField
 from django.db.models.functions import Coalesce
 from .serializers import (
     CarListSerializer, CarDetailSerializer, CarCategorySerializer, SteeringSerializer,
-    FuelSerializer, CarCreateSerializer, CarImageSerializer
+    FuelSerializer, CarCreateSerializer, CarImageSerializer, CarReviewSerializer,
+    CarReviewEditSerializer
 )
 from rest_framework.permissions import IsAuthenticated
-from services.permissions import CarsPermission
+from services.permissions import CarsPermission, CarReviewPermission
 from rest_framework.response import Response
 
 
@@ -96,4 +99,23 @@ class CarImageDeleteView(generics.DestroyAPIView):
     queryset = CarImage.objects.all()
     serializer_class = CarImageSerializer
     permission_classes = (IsAuthenticated, CarsPermission)
+
+
+class CarReviewCreateView(generics.CreateAPIView):
+    queryset = CarReview.objects.all()
+    serializer_class = CarReviewSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
+
+class CarReviewEditView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = CarReviewEditSerializer
+    permission_classes = (IsAuthenticated, CarReviewPermission)
+    lookup_field = "id"
+
+    def get_queryset(self):
+        return CarReview.objects.filter(user=self.request.user)
+
 

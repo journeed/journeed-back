@@ -51,6 +51,7 @@ class CarReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarReview
         fields = (
+            "id",
             "car",
             "user",
             "content",
@@ -60,6 +61,16 @@ class CarReviewSerializer(serializers.ModelSerializer):
             "car": {"write_only": True},
             "user": {"write_only": True}
         }
+
+
+class CarReviewEditSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CarReview
+        fields = (
+            "content",
+            "rating"
+        )
 
 
 class CarListSerializer(serializers.ModelSerializer):
@@ -111,6 +122,12 @@ class CarDetailSerializer(serializers.ModelSerializer):
         images_qs = instance.carimage_set.all()
         images = CarImageSerializer(images_qs, many=True).data
         repr_["images"] = images
+
+        review_qs = instance.carreview_set.all()
+        repr_["review"] = {
+            "review_count": review_qs.count(),
+            "reviews": CarReviewSerializer(review_qs, many=True).data
+        }
         return repr_
 
 

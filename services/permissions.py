@@ -14,3 +14,8 @@ class CarsPermission(BasePermission):
         return request.user.is_partnership
 
 
+class CarReviewPermission(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.user == request.user
+
+
