@@ -28,4 +28,3 @@ class Partnership(DateMixin):
         ordering = ('-created_at', )
         verbose_name = 'Partnership'
         verbose_name_plural = 'Partnerships'
-

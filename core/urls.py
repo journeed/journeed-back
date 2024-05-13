@@ -6,6 +6,7 @@ urlpatterns = [
     path("user-api/", include("user.urls")),
     path('info-api/', include('info.urls')),
     path('features-api/', include('features.urls')),
+    path('cars-api/', include('cars.urls')),
 ]
 
 from django.conf import settings
