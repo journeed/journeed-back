@@ -1,4 +1,6 @@
+import datetime
 import re
+import pathlib
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -7,6 +9,7 @@ from django.utils.encoding import smart_bytes
 from services.generator import CodeGenerator
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import Profile
 
 User = get_user_model()
 
@@ -309,6 +312,27 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
             "access": str(token.access_token)
         }
         return repr_
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = (
+            "profile_photo",
+            "birth_day",
+            "bio"
+        )
+
+    def validate(self, attrs):
+        profile_photo = attrs.get("profile_photo", None)
+
+        if profile_photo:
+            photo_path = pathlib.Path(str(profile_photo)).suffix
+
+            if photo_path not in [".jpg", ".jpeg", ".png"]:
+                raise serializers.ValidationError({"error": "Yüklədiyiniz şəkil formati dəstəklənmir."})
+        return attrs
 
 
 
