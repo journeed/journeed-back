@@ -15,10 +15,16 @@ class HomeInfo(DateMixin):
     def __str__(self):
         return "Home Info"
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # preventing the creation of a second object
+        self.__class__.objects.exclude(id=self.id).delete()
+
 
 class AboutInfo(DateMixin):
     slogan = models.CharField(max_length=300)
     head = models.CharField(max_length=300)
+    background = models.ImageField(upload_to=Uploader.about_background_uploader, null=True)
     first_content = models.TextField()
     second_content = models.TextField(null=True, blank=True)
 
@@ -27,7 +33,6 @@ class AboutInfo(DateMixin):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        # preventing the creation of a second object
         self.__class__.objects.exclude(id=self.id).delete()
 
 

@@ -8,5 +8,9 @@ class Uploader:
         return f"home/{instance}/{filename}"
 
     @staticmethod
+    def about_background_uploader(instance, filename):
+        return f"about/{instance}/{filename}"
+
+    @staticmethod
     def story_uploader(instance, filename):
         return f"story/{instance.user.full_name}/{filename}"

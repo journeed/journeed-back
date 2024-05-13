@@ -13,5 +13,11 @@ urlpatterns = [
     path('story-comment-create/', views.StoryCommentCreateView.as_view(), name='story-comment-create'),
     path('story-comment-update/<int:id>/', views.StoryCommentUpdateView.as_view(), name='story-comment-update'),
     path('story-comment-delete/<int:id>/', views.StoryCommentDeleteView.as_view(), name='story-comment-delete'),
+
+    # Like
+    path('story-like-list/', views.StoryLikeListView.as_view(), name='story-comment-like'),
+    path('story-like-create/', views.StoryLikeCreateView.as_view(), name='story-like-create'),
+    path('story-comment-like-list/', views.StoryCommentLikeListView.as_view(), name='story-comment-like'),
+    path('story-comment-like-create/', views.StoryCommentLikeCreateView.as_view(), name='story-comment-like-create'),
 ]
 

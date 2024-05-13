@@ -15,7 +15,15 @@ class AccessPermission(permissions.BasePermission):
             return False
 
 
-class StoryPermission(permissions.BasePermission):
+class ManagerPermission(permissions.BasePermission):
+    message = 'You are not a manager'
+
+    def has_permission(self, request, view):
+        if request.user.is_authenticated:
+            return request.user.is_superuser
+
+
+class OtherPermission(permissions.BasePermission):
     message = 'You are not a manager'
 
     def has_permission(self, request, view):
@@ -29,7 +37,7 @@ class StoryPermission(permissions.BasePermission):
             return obj.user == request.user
 
 
-class StoryCommentPermission(permissions.BasePermission):
+class ObjectPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return True

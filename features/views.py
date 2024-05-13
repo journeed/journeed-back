@@ -2,16 +2,12 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .models import Story, StoryComment
-from .serializers import (StoryListSerializer, StoryCreateSerializer, StoryDetailSerializer,
-                          StoryCommentListSerializer, StoryCommentCreateSerializer, StoryCommentUpdateSerializer,
-                          StoryCommentDeleteSerializer
-                          )
-from .permission import AccessPermission, StoryPermission, StoryCommentPermission
+from .models import Story, StoryComment, StoryLike, StoryCommentLike
+from .serializers import *
+from services.permission import AccessPermission, OtherPermission, ObjectPermission
 
 
 # Story
-
 
 class StoryListView(generics.ListAPIView):
     queryset = Story.objects.all()
@@ -45,12 +41,11 @@ class StoryDetailView(generics.RetrieveAPIView):
 class StoryDeleteView(generics.DestroyAPIView):
     queryset = Story.objects.all()
     serializer_class = StoryDetailSerializer
-    permission_classes = [StoryPermission]
+    permission_classes = [OtherPermission]
     lookup_field = "id"
 
 
 # Story Comment
-
 
 class StoryCommentListView(generics.ListAPIView):
     queryset = StoryComment.objects.all()
@@ -69,7 +64,7 @@ class StoryCommentCreateView(generics.CreateAPIView):
 class StoryCommentUpdateView(generics.UpdateAPIView):
     queryset = StoryComment.objects.all()
     serializer_class = StoryCommentUpdateSerializer
-    permission_classes = (IsAuthenticated, StoryCommentPermission)
+    permission_classes = (IsAuthenticated, ObjectPermission)
     lookup_field = "id"
 
     def perform_update(self, serializer):
@@ -79,5 +74,61 @@ class StoryCommentUpdateView(generics.UpdateAPIView):
 class StoryCommentDeleteView(generics.DestroyAPIView):
     queryset = StoryComment.objects.all()
     serializer_class = StoryCommentDeleteSerializer
-    permission_classes = (IsAuthenticated, StoryCommentPermission)
+    permission_classes = (IsAuthenticated, ObjectPermission)
     lookup_field = "id"
+
+
+# Story like
+
+class StoryLikeListView(generics.ListAPIView):
+    queryset = StoryLike.objects.all()
+    serializer_class = StoryLikeListSerializer
+
+
+class StoryLikeCreateView(generics.CreateAPIView):
+    queryset = StoryLike.objects.all()
+    serializer_class = StoryLikeCreateSerializer
+    permission_classes = (OtherPermission,)
+
+    # def post(self, request, *args, **kwargs):
+    #     story_id = request.data.get("story")
+    #     story, created = StoryLike.objects.get_or_create(story_id=story_id, user=request.user)
+    #
+    #     if not created:
+    #         story.delete()
+    #
+    #     serializer = self.serializer_class(story).data
+    #
+    #     return Response(serializer, status=200)
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
+
+# Story Comment Like
+
+class StoryCommentLikeListView(generics.ListAPIView):
+    queryset = StoryCommentLike.objects.all()
+    serializer_class = StoryCommentLikeListSerializer
+
+
+class StoryCommentLikeCreateView(generics.CreateAPIView):
+    queryset = StoryCommentLike.objects.all()
+    serializer_class = StoryCommentLikeCreateSerializer
+    permission_classes = (OtherPermission,)
+
+    # def post(self, request, *args, **kwargs):
+    #     story_comment_id = request.data.get("story_comment")
+    #     story_comment, created = StoryCommentLike.objects.get_or_create(story_comment_id=story_comment_id, user=request.user)
+    #
+    #     if not created:
+    #         story_comment.delete()
+    #
+    #     serializer = self.serializer_class(story_comment).data
+    #
+    #     return Response(serializer, status=200)
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
+

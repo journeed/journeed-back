@@ -32,3 +32,20 @@ class StoryComment(DateMixin):
         ordering = ('-created_at', )
         verbose_name = 'Story Comment'
         verbose_name_plural = 'Story Comments'
+
+
+class StoryLike(DateMixin):
+    story = models.ForeignKey(Story, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.story.user} --- {self.user.full_name}'
+
+
+class StoryCommentLike(DateMixin):
+    story_comment = models.ForeignKey(StoryComment, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.story_comment} --- {self.user.full_name}'
+
