@@ -9,7 +9,7 @@ User = get_user_model()
 class Role(models.Model):
     role_name = models.CharField(max_length=100)
 
-    def str(self):
+    def __str__(self):
         return self.role_name
 
 
@@ -21,7 +21,7 @@ class Partnership(DateMixin):
     about = models.TextField(blank=True, null=True)
     mobile = PhoneNumberField(null=True, unique=True)
 
-    def str(self):
+    def __str__(self):
         return f'{self.name} - {self.role}'
 
     class Meta:

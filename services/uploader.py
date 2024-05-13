@@ -13,3 +13,11 @@ class Uploader:
     @staticmethod
     def car_image_uploader(instance, filename):
         return f"cars/{slugify(instance.car.name)}/{filename}"
+
+    @staticmethod
+    def about_background_uploader(instance, filename):
+        return f"about/{instance}/{filename}"
+
+    @staticmethod
+    def story_uploader(instance, filename):
+        return f"story/{instance.user.full_name}/{filename}"

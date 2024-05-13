@@ -18,4 +18,3 @@ class CarListPagination(PageNumberPagination):
                 "results": data,
             }
         )
-
