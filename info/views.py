@@ -1,7 +1,7 @@
 from rest_framework import generics
 from .models import HomeInfo, AboutInfo, DifferentInfo, SocialMedia, ContactInfo, Contact
 from .serializers import *
-from services.permission import ManagerPermission
+from services.permission import ManagerPermission, ManagerObjectPermission
 from rest_framework.response import Response
 from django.conf import settings
 from django.core.mail import send_mail
@@ -27,7 +27,7 @@ class HomeInfoCreateView(generics.CreateAPIView):
 class HomeInfoUpdateView(generics.UpdateAPIView):
     queryset = HomeInfo.objects.all()
     serializer_class = HomeInfoUpdateSerializer
-    permission_classes = (ManagerPermission,)
+    permission_classes = (ManagerObjectPermission,)
     lookup_field = "id"
 
     def get_object(self):
@@ -40,7 +40,7 @@ class HomeInfoUpdateView(generics.UpdateAPIView):
 class HomeInfoDeleteView(generics.DestroyAPIView):
     queryset = HomeInfo.objects.all()
     serializer_class = HomeInfoDeleteSerializer
-    permission_classes = (ManagerPermission, )
+    permission_classes = (ManagerObjectPermission, )
     lookup_field = "id"
 
     def get_object(self):
@@ -67,7 +67,7 @@ class AboutInfoCreateView(generics.CreateAPIView):
 class AboutInfoUpdateView(generics.UpdateAPIView):
     queryset = AboutInfo.objects.all()
     serializer_class = AboutInfoUpdateSerializer
-    permission_classes = (ManagerPermission, )
+    permission_classes = (ManagerObjectPermission, )
     lookup_field = "id"
 
     def get_object(self):
@@ -80,7 +80,7 @@ class AboutInfoUpdateView(generics.UpdateAPIView):
 class AboutInfoDeleteView(generics.DestroyAPIView):
     queryset = AboutInfo.objects.all()
     serializer_class = AboutInfoDeleteSerializer
-    permission_classes = (ManagerPermission, )
+    permission_classes = (ManagerObjectPermission, )
 
     def get_object(self):
         return self.queryset.first()
@@ -103,7 +103,7 @@ class DifferentInfoCreateView(generics.CreateAPIView):
 class DifferentInfoUpdateView(generics.UpdateAPIView):
     queryset = DifferentInfo.objects.all()
     serializer_class = DifferentInfoUpdateSerializer
-    permission_classes = (ManagerPermission, )
+    permission_classes = (ManagerObjectPermission, )
     lookup_field = "id"
 
     def perform_update(self, serializer):
@@ -113,7 +113,7 @@ class DifferentInfoUpdateView(generics.UpdateAPIView):
 class DifferentInfoDeleteView(generics.DestroyAPIView):
     queryset = DifferentInfo.objects.all()
     serializer_class = DifferentInfoDeleteSerializer
-    permission_classes = (ManagerPermission, )
+    permission_classes = (ManagerObjectPermission, )
     lookup_field = "id"
 
 
@@ -134,7 +134,7 @@ class SocialMediaCreateView(generics.CreateAPIView):
 class SocialMediaUpdateView(generics.UpdateAPIView):
     queryset = SocialMedia.objects.all()
     serializer_class = SocialMediaUpdateSerializer
-    permission_classes = (ManagerPermission, )
+    permission_classes = (ManagerObjectPermission, )
     lookup_field = "id"
 
     def perform_update(self, serializer):
@@ -144,7 +144,7 @@ class SocialMediaUpdateView(generics.UpdateAPIView):
 class SocialMediaDeleteView(generics.DestroyAPIView):
     queryset = SocialMedia.objects.all()
     serializer_class = SocialMediaDeleteSerializer
-    permission_classes = (ManagerPermission, )
+    permission_classes = (ManagerObjectPermission, )
     lookup_field = "id"
 
 
@@ -168,7 +168,7 @@ class ContactInfoCreateView(generics.CreateAPIView):
 class ContactInfoUpdateView(generics.UpdateAPIView):
     queryset = ContactInfo.objects.all()
     serializer_class = ContactInfoUpdateSerializer
-    permission_classes = (ManagerPermission, )
+    permission_classes = (ManagerObjectPermission, )
     lookup_field = "id"
 
     def get_object(self):
@@ -181,7 +181,7 @@ class ContactInfoUpdateView(generics.UpdateAPIView):
 class ContactInfoDeleteView(generics.DestroyAPIView):
     queryset = ContactInfo.objects.all()
     serializer_class = ContactInfoDeleteSerializer
-    permission_classes = (ManagerPermission, )
+    permission_classes = (ManagerObjectPermission, )
     lookup_field = "id"
 
     def get_object(self):
