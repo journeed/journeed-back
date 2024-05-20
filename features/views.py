@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Story, StoryComment, StoryLike, StoryCommentLike
 from .serializers import *
-from services.permission import AccessPermission, OtherPermission, ObjectPermission
+from services.permission import ObjectPermission
 
 
 # Story
@@ -17,7 +17,7 @@ class StoryListView(generics.ListAPIView):
 class StoryCreateView(generics.CreateAPIView):
     queryset = Story.objects.all()
     serializer_class = StoryCreateSerializer
-    permission_classes = [AccessPermission]
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
@@ -41,7 +41,7 @@ class StoryDetailView(generics.RetrieveAPIView):
 class StoryDeleteView(generics.DestroyAPIView):
     queryset = Story.objects.all()
     serializer_class = StoryDetailSerializer
-    permission_classes = [OtherPermission]
+    permission_classes = [IsAuthenticated]
     lookup_field = "id"
 
 
@@ -88,18 +88,7 @@ class StoryLikeListView(generics.ListAPIView):
 class StoryLikeCreateView(generics.CreateAPIView):
     queryset = StoryLike.objects.all()
     serializer_class = StoryLikeCreateSerializer
-    permission_classes = (OtherPermission,)
-
-    # def post(self, request, *args, **kwargs):
-    #     story_id = request.data.get("story")
-    #     story, created = StoryLike.objects.get_or_create(story_id=story_id, user=request.user)
-    #
-    #     if not created:
-    #         story.delete()
-    #
-    #     serializer = self.serializer_class(story).data
-    #
-    #     return Response(serializer, status=200)
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
@@ -115,7 +104,7 @@ class StoryCommentLikeListView(generics.ListAPIView):
 class StoryCommentLikeCreateView(generics.CreateAPIView):
     queryset = StoryCommentLike.objects.all()
     serializer_class = StoryCommentLikeCreateSerializer
-    permission_classes = (OtherPermission,)
+    permission_classes = (IsAuthenticated,)
 
     # def post(self, request, *args, **kwargs):
     #     story_comment_id = request.data.get("story_comment")

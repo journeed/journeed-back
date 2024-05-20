@@ -11,7 +11,7 @@ from .serializers import (
     CarReviewEditSerializer
 )
 from rest_framework.permissions import IsAuthenticated
-from services.permissions import CarsPermission, CarReviewPermission
+from services.permission import CarsPermission, CarReviewPermission
 from rest_framework.response import Response
 
 
