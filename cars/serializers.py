@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Car, CarImage, CarCategory, Steering, CarReview, Fuel
+from .models import Car, CarImage, CarCategory, Steering, CarReview, Fuel, CarWishlist
 
 
 class CarImageSerializer(serializers.ModelSerializer):
