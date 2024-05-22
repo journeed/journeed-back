@@ -34,6 +34,12 @@ class StoryCreateSerializer(serializers.ModelSerializer):
         return attrs
 
 
+class StoryUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Story
+        fields = ("status", )
+
+
 class StoryDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Story
