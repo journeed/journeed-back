@@ -1,7 +1,8 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from services.mixin import DateMixin, SlugMixin
 from services.uploader import Uploader
-from django.contrib.auth import get_user_model
+from services.choices import ACTIVITY
 
 Users = get_user_model()
 
@@ -10,6 +11,7 @@ class Story(DateMixin):
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     file = models.FileField(upload_to=Uploader.story_uploader)
     view_count = models.PositiveIntegerField(default=0)
+    status = models.CharField(max_length=50, choices=ACTIVITY, default="Deactivated")
 
     def __str__(self):
         return self.user.full_name

@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Story, StoryComment, StoryLike, StoryCommentLike
 from .serializers import *
-from services.permission import ObjectPermission
+from services.permission import ManagerPermission, ObjectPermission
 
 
 # Story
@@ -12,6 +12,9 @@ from services.permission import ObjectPermission
 class StoryListView(generics.ListAPIView):
     queryset = Story.objects.all()
     serializer_class = StoryListSerializer
+
+    def get_queryset(self):
+        return Story.objects.filter(status="Activated")
 
 
 class StoryCreateView(generics.CreateAPIView):
@@ -21,6 +24,13 @@ class StoryCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
+
+
+class StoryUpdateView(generics.UpdateAPIView):
+    queryset = Story.objects.all()
+    serializer_class = StoryUpdateSerializer
+    permission_classes = [ManagerPermission]
+    lookup_field = "id"
 
 
 class StoryDetailView(generics.RetrieveAPIView):
@@ -39,10 +49,12 @@ class StoryDetailView(generics.RetrieveAPIView):
 
 
 class StoryDeleteView(generics.DestroyAPIView):
-    queryset = Story.objects.all()
     serializer_class = StoryDetailSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = "id"
+
+    def get_queryset(self):
+        return Story.objects.filter(status="Activated")
 
 
 # Story Comment
@@ -105,17 +117,6 @@ class StoryCommentLikeCreateView(generics.CreateAPIView):
     queryset = StoryCommentLike.objects.all()
     serializer_class = StoryCommentLikeCreateSerializer
     permission_classes = (IsAuthenticated,)
-
-    # def post(self, request, *args, **kwargs):
-    #     story_comment_id = request.data.get("story_comment")
-    #     story_comment, created = StoryCommentLike.objects.get_or_create(story_comment_id=story_comment_id, user=request.user)
-    #
-    #     if not created:
-    #         story_comment.delete()
-    #
-    #     serializer = self.serializer_class(story_comment).data
-    #
-    #     return Response(serializer, status=200)
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
