@@ -25,3 +25,7 @@ class Uploader:
     @staticmethod
     def partnership_photo_uploader(instance, filename):
         return f"partnership/{instance.user}/{filename}"
+
+    @staticmethod
+    def partnership_type_photo_uploader(instance, filename):
+        return f"partnership-type/{instance.title}/{filename}"
