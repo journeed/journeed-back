@@ -7,6 +7,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 
+# Home Page Info
+
 class HomeInfoView(generics.RetrieveAPIView):
     queryset = HomeInfo.objects.all()
     serializer_class = HomeInfoSerializer
@@ -46,6 +48,8 @@ class HomeInfoDeleteView(generics.DestroyAPIView):
     def get_object(self):
         return self.queryset.first()
 
+
+# About Page Info
 
 class AboutInfoView(generics.RetrieveAPIView):
     queryset = AboutInfo.objects.all()
@@ -117,6 +121,8 @@ class DifferentInfoDeleteView(generics.DestroyAPIView):
     lookup_field = "id"
 
 
+# Social Media Info
+
 class SocialMediaView(generics.ListAPIView):
     queryset = SocialMedia.objects.all()
     serializer_class = SocialMediaSerializer
@@ -147,6 +153,8 @@ class SocialMediaDeleteView(generics.DestroyAPIView):
     permission_classes = (ManagerObjectPermission, )
     lookup_field = "id"
 
+
+# Contact Page Info
 
 class ContactInfoView(generics.RetrieveAPIView):
     queryset = ContactInfo.objects.all()
@@ -188,6 +196,8 @@ class ContactInfoDeleteView(generics.DestroyAPIView):
         return ContactInfo.objects.first()
 
 
+# Contact
+
 class ContactListView(generics.ListAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactListSerializer
@@ -222,4 +232,132 @@ class ContactDeleteView(generics.DestroyAPIView):
     serializer_class = ContactDeleteSerializer
     permission_classes = (ManagerPermission, )
     lookup_field = "id"
+
+
+# Partnership Page Info
+
+class PartnershipFeatureInfoListView(generics.ListAPIView):
+    queryset = PartnershipFeatureInfo.objects.all()
+    serializer_class = PartnershipFeatureInfoListSerializer
+
+
+class PartnershipFeatureInfoCreateView(generics.CreateAPIView):
+    queryset = PartnershipFeatureInfo.objects.all()
+    serializer_class = PartnershipFeatureInfoCreateSerializer
+    permission_classes = (ManagerPermission,)
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+
+class PartnershipFeatureInfoUpdateView(generics.UpdateAPIView):
+    queryset = PartnershipFeatureInfo.objects.all()
+    serializer_class = PartnershipFeatureInfoUpdateSerializer
+    permission_classes = (ManagerPermission,)
+    lookup_field = "id"
+
+    def perform_update(self, serializer):
+        return serializer.save()
+
+
+class PartnershipFeatureInfoDeleteView(generics.DestroyAPIView):
+    queryset = PartnershipFeatureInfo.objects.all()
+    serializer_class = PartnershipFeatureInfoDeleteSerializer
+    permission_classes = (ManagerPermission,)
+    lookup_field = "id"
+
+
+class PartnershipTypeInfoListView(generics.ListAPIView):
+    queryset = PartnershipTypeInfo.objects.all()
+    serializer_class = PartnershipTypeInfoListSerializer
+
+
+class PartnershipTypeInfoCreateView(generics.CreateAPIView):
+    queryset = PartnershipTypeInfo.objects.all()
+    serializer_class = PartnershipTypeInfoCreateSerializer
+    permission_classes = (ManagerPermission,)
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+
+class PartnershipTypeInfoUpdateView(generics.UpdateAPIView):
+    queryset = PartnershipTypeInfo.objects.all()
+    serializer_class = PartnershipTypeInfoUpdateSerializer
+    permission_classes = (ManagerPermission,)
+    lookup_field = "id"
+
+    def perform_update(self, serializer):
+        return serializer.save()
+
+
+class PartnershipTypeInfoDeleteView(generics.DestroyAPIView):
+    queryset = PartnershipTypeInfo.objects.all()
+    serializer_class = PartnershipTypeInfoDeleteSerializer
+    permission_classes = (ManagerPermission,)
+    lookup_field = "id"
+
+
+class PartnershipCommissionInfoListView(generics.ListAPIView):
+    queryset = PartnershipCommissionInfo.objects.all()
+    serializer_class = PartnershipCommissionInfoListSerializer
+
+
+class PartnershipCommissionInfoCreateView(generics.CreateAPIView):
+    queryset = PartnershipCommissionInfo.objects.all()
+    serializer_class = PartnershipCommissionInfoCreateSerializer
+    permission_classes = (ManagerPermission,)
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+
+class PartnershipCommissionInfoUpdateView(generics.UpdateAPIView):
+    queryset = PartnershipCommissionInfo.objects.all()
+    serializer_class = PartnershipCommissionInfoUpdateSerializer
+    permission_classes = (ManagerPermission,)
+    lookup_field = "id"
+
+    def perform_update(self, serializer):
+        return serializer.save()
+
+
+class PartnershipCommissionInfoDeleteView(generics.DestroyAPIView):
+    queryset = PartnershipCommissionInfo.objects.all()
+    serializer_class = PartnershipCommissionInfoDeleteSerializer
+    permission_classes = (ManagerPermission,)
+    lookup_field = "id"
+
+
+class PartnershipFaqInfoListView(generics.ListAPIView):
+    queryset = PartnershipFaqInfo.objects.all()
+    serializer_class = PartnershipFaqInfoListSerializer
+
+
+class PartnershipFaqInfoCreateView(generics.CreateAPIView):
+    queryset = PartnershipFaqInfo.objects.all()
+    serializer_class = PartnershipFaqInfoCreateSerializer
+    permission_classes = (ManagerPermission,)
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+
+class PartnershipFaqInfoUpdateView(generics.UpdateAPIView):
+    queryset = PartnershipFaqInfo.objects.all()
+    serializer_class = PartnershipFaqInfoUpdateSerializer
+    permission_classes = (ManagerPermission,)
+    lookup_field = "id"
+
+    def perform_update(self, serializer):
+        return serializer.save()
+
+
+class PartnershipFaqInfoDeleteView(generics.DestroyAPIView):
+    queryset = PartnershipFaqInfo.objects.all()
+    serializer_class = PartnershipFaqInfoDeleteSerializer
+    permission_classes = (ManagerPermission,)
+    lookup_field = "id"
+
+
 

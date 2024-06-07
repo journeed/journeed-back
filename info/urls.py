@@ -16,7 +16,7 @@ urlpatterns = [
     path('about-update/<int:id>/', views.AboutInfoUpdateView.as_view(), name='about-update'),
     path('about-delete/<int:id>/', views.AboutInfoDeleteView.as_view(), name='about-delete'),
 
-    # different info
+    # about different info
     path('different/', views.DifferentInfoView.as_view(), name='different'),
     path('different-create/', views.DifferentInfoCreateView.as_view(), name='different-create'),
     path('different-update/<int:id>/', views.DifferentInfoUpdateView.as_view(), name='different-update'),
@@ -38,4 +38,28 @@ urlpatterns = [
     path('contact-list/', views.ContactListView.as_view(), name='contact-list'),
     path('contact-create/', views.ContactCreateView.as_view(), name='contact-create'),
     path('contact-delete/<int:id>/', views.ContactDeleteView.as_view(), name='contact-delete'),
+
+    # partnership feature info
+    path('partnership-feature-list/', views.PartnershipFeatureInfoListView.as_view(), name='partnership-feature-list'),
+    path('partnership-feature-create/', views.PartnershipFeatureInfoCreateView.as_view(), name='partnership-feature-create'),
+    path('partnership-feature-update/<int:id>/', views.PartnershipFeatureInfoUpdateView.as_view(), name='partnership-feature-update'),
+    path('partnership-feature-delete/<int:id>/', views.PartnershipFeatureInfoDeleteView.as_view(), name='partnership-feature-delete'),
+
+    # partnership type info
+    path('partnership-type-list/', views.PartnershipTypeInfoListView.as_view(), name='partnership-type-list'),
+    path('partnership-type-create/', views.PartnershipTypeInfoCreateView.as_view(), name='partnership-type-create'),
+    path('partnership-type-update/<int:id>/', views.PartnershipTypeInfoUpdateView.as_view(), name='partnership-type-update'),
+    path('partnership-type-delete/<int:id>/', views.PartnershipTypeInfoDeleteView.as_view(), name='partnership-type-delete'),
+
+    # partnership commission info
+    path('partnership-commission-list/', views.PartnershipCommissionInfoListView.as_view(), name='partnership-feature-list'),
+    path('partnership-commission-create/', views.PartnershipCommissionInfoCreateView.as_view(), name='partnership-commission-create'),
+    path('partnership-commission-update/<int:id>/', views.PartnershipCommissionInfoUpdateView.as_view(), name='partnership-commission-update'),
+    path('partnership-commission-delete/<int:id>/', views.PartnershipCommissionInfoDeleteView.as_view(), name='partnership-commission-delete'),
+
+    # partnership faq info
+    path('partnership-faq-list/', views.PartnershipFaqInfoListView.as_view(), name='partnership-faq-list'),
+    path('partnership-faq-create/', views.PartnershipFaqInfoCreateView.as_view(), name='partnership-faq-create'),
+    path('partnership-faq-update/<int:id>/', views.PartnershipFaqInfoUpdateView.as_view(), name='partnership-faq-update'),
+    path('partnership-faq-delete/<int:id>/', views.PartnershipFaqInfoDeleteView.as_view(), name='partnership-faq-delete'),
 ]
