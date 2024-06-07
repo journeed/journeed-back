@@ -80,4 +80,3 @@ class BlogCommentDeleteView(generics.DestroyAPIView):
     permission_classes = (IsAuthenticated, ObjectPermission)
     lookup_field = "id"
 
-

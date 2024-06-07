@@ -205,11 +205,13 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = 'user.User'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.environ.get('HOST_USER')  # email address
 EMAIL_HOST_PASSWORD = os.environ.get('HOST_PASSWORD')  # email app password
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False

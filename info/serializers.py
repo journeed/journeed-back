@@ -1,7 +1,7 @@
 from rest_framework import serializers
 import re
 import pathlib
-from .models import HomeInfo, AboutInfo, DifferentInfo, SocialMedia, ContactInfo, Contact
+from .models import *
 from services.validate import validate_photo
 
 
@@ -198,4 +198,5 @@ class ContactDeleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = ("id", )
+
 
