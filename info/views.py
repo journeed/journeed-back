@@ -1,5 +1,5 @@
 from rest_framework import generics
-from .models import HomeInfo, AboutInfo, DifferentInfo, SocialMedia, ContactInfo, Contact
+from .models import *
 from .serializers import *
 from services.permission import ManagerPermission, ManagerObjectPermission
 from rest_framework.response import Response
@@ -222,3 +222,4 @@ class ContactDeleteView(generics.DestroyAPIView):
     serializer_class = ContactDeleteSerializer
     permission_classes = (ManagerPermission, )
     lookup_field = "id"
+

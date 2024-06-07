@@ -81,5 +81,3 @@ class Contact(DateMixin):
         ordering = ('-created_at', )
         verbose_name = 'Contact'
         verbose_name_plural = 'Contacts'
-
-
