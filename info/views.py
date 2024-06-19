@@ -49,6 +49,56 @@ class HomeInfoDeleteView(generics.DestroyAPIView):
         return self.queryset.first()
 
 
+class SpecialOfferListView(generics.ListAPIView):
+    queryset = SpecialOffer.objects.all()
+    serializer_class = SpecialOfferListSerializer
+
+
+class SpecialOfferDetailView(generics.RetrieveAPIView):
+    queryset = SpecialOffer.objects.all()
+    serializer_class = SpecialOfferListSerializer
+    lookup_field = "slug"
+
+
+class SpecialOfferCreateView(generics.CreateAPIView):
+    queryset = SpecialOffer.objects.all()
+    serializer_class = SpecialOfferCreateSerializer
+    permission_classes = (ManagerPermission, )
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
+
+class SpecialOfferUpdateView(generics.UpdateAPIView):
+    queryset = SpecialOffer.objects.all()
+    serializer_class = SpecialOfferUpdateSerializer
+    permission_classes = (ManagerPermission, )
+    lookup_field = "slug"
+
+    def put(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, instance=self.get_object(),
+                                           context={"user": self.request.user})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=200)
+
+    def patch(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, instance=self.get_object(),
+                                           context={"user": self.request.user})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=200)
+
+
+class SpecialOfferDeleteView(generics.DestroyAPIView):
+    queryset = SpecialOffer.objects.all()
+    serializer_class = SpecialOfferDeleteSerializer
+    permission_classes = (ManagerPermission, )
+    lookup_field = "slug"
+
+
 # About Page Info
 
 class AboutInfoView(generics.RetrieveAPIView):

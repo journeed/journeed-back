@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Blog, BlogComment, Advice, Gallery, Pastime
+from .models import Blog, BlogComment, News, Gallery, Pastime
 from services.slugify import unique_slug_generator
 import pathlib
 
@@ -53,7 +53,7 @@ class BlogUpdateSerializer(serializers.ModelSerializer):
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
 
-        instance.slug = unique_slug_generator(instance, old_slug=self.context.get('slug'))
+        instance.slug = unique_slug_generator(instance, old_slug=instance.slug)
         instance.user = self.context.get('user')
         instance.save()
 
@@ -98,15 +98,15 @@ class BlogCommentDeleteSerializer(serializers.ModelSerializer):
         fields = ("id", )
 
 
-class AdviceListSerializer(serializers.ModelSerializer):
+class NewsListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Advice
+        model = News
         fields = "__all__"
 
 
-class AdviceCreateSerializer(serializers.ModelSerializer):
+class NewsCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Advice
+        model = News
         fields = "__all__"
         extra_kwargs = {
             'user': {'read_only': True},
@@ -124,9 +124,9 @@ class AdviceCreateSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AdviceUpdateSerializer(serializers.ModelSerializer):
+class NewsUpdateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Advice
+        model = News
         fields = "__all__"
         extra_kwargs = {
             'user': {'read_only': True},
@@ -153,9 +153,9 @@ class AdviceUpdateSerializer(serializers.ModelSerializer):
         return instance
 
 
-class AdviceDeleteSerializer(serializers.ModelSerializer):
+class NewsDeleteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Advice
+        model = News
         fields = ("id", )
 
 

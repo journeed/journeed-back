@@ -6,7 +6,7 @@ app_name = "blog"
 urlpatterns = [
     # blog
     path('blog-list/', views.BlogListView.as_view(), name='blog-list'),
-    path('blog-detail/<slug:slug>/', views.BlogDetailView.as_view(), name='blog-create'),
+    path('blog-detail/<slug:slug>/', views.BlogDetailView.as_view(), name='blog-detail'),
     path('blog-create/', views.BlogCreateView.as_view(), name='blog-create'),
     path('blog-update/<slug:slug>/', views.BlogUpdateView.as_view(), name='blog-update'),
     path('blog-delete/<slug:slug>/', views.BlogDeleteView.as_view(), name='blog-delete'),
@@ -17,12 +17,12 @@ urlpatterns = [
     path('blog-comment-update/<int:id>/', views.BlogCommentUpdateView.as_view(), name='blog-comment-update'),
     path('blog-comment-delete/<int:id>/', views.BlogCommentDeleteView.as_view(), name='blog-comment-delete'),
 
-    # advice
-    path('advice-list/', views.AdviceListView.as_view(), name='advice-list'),
-    path('advice-detail/<slug:slug>/', views.AdviceDetailView.as_view(), name='advice-create'),
-    path('advice-create/', views.AdviceCreateView.as_view(), name='advice-create'),
-    path('advice-update/<slug:slug>/', views.AdviceUpdateView.as_view(), name='advice-update'),
-    path('advice-delete/<slug:slug>/', views.AdviceDeleteView.as_view(), name='advice-delete'),
+    # news
+    path('news-list/', views.NewsListView.as_view(), name='news-list'),
+    path('news-detail/<slug:slug>/', views.NewsDetailView.as_view(), name='news-detail'),
+    path('news-create/', views.NewsCreateView.as_view(), name='news-create'),
+    path('news-update/<slug:slug>/', views.NewsUpdateView.as_view(), name='news-update'),
+    path('news-delete/<slug:slug>/', views.NewsDeleteView.as_view(), name='news-delete'),
 
     # gallery
     path('gallery-list/', views.GalleryListView.as_view(), name='gallery-list'),

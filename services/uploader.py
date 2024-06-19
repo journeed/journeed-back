@@ -11,6 +11,10 @@ class Uploader:
         return f"home/{instance}/{filename}"
 
     @staticmethod
+    def special_offer_image_uploader(instance, filename):
+        return f"special-offer/{instance.user.full_name}/{filename}"
+
+    @staticmethod
     def car_image_uploader(instance, filename):
         return f"cars/{slugify(instance.car.name)}/{filename}"
 

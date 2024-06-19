@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .models import Blog, BlogComment, Advice
+from .models import Blog, BlogComment, News
 from .serializers import *
 from services.permission import ManagerPermission, ObjectPermission
 
@@ -35,8 +35,15 @@ class BlogUpdateView(generics.UpdateAPIView):
 
     def put(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data, instance=self.get_object(),
-                                           context={"user": self.request.user,
-                                                    "slug": self.kwargs.get("slug")})
+                                           context={"user": self.request.user})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=200)
+
+    def patch(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, instance=self.get_object(),
+                                           context={"user": self.request.user})
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
@@ -84,29 +91,29 @@ class BlogCommentDeleteView(generics.DestroyAPIView):
     lookup_field = "id"
 
 
-class AdviceListView(generics.ListAPIView):
-    queryset = Advice.objects.all()
-    serializer_class = AdviceListSerializer
+class NewsListView(generics.ListAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsListSerializer
 
 
-class AdviceDetailView(generics.RetrieveAPIView):
-    queryset = Advice.objects.all()
-    serializer_class = AdviceListSerializer
+class NewsDetailView(generics.RetrieveAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsListSerializer
     lookup_field = "slug"
 
 
-class AdviceCreateView(generics.CreateAPIView):
-    queryset = Advice.objects.all()
-    serializer_class = AdviceCreateSerializer
+class NewsCreateView(generics.CreateAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsCreateSerializer
     permission_classes = (ManagerPermission, )
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
 
 
-class AdviceUpdateView(generics.UpdateAPIView):
-    queryset = Advice.objects.all()
-    serializer_class = AdviceUpdateSerializer
+class NewsUpdateView(generics.UpdateAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsUpdateSerializer
     permission_classes = (ManagerPermission, )
     lookup_field = "slug"
 
@@ -114,9 +121,9 @@ class AdviceUpdateView(generics.UpdateAPIView):
         return serializer.save(user=self.request.user)
 
 
-class AdviceDeleteView(generics.DestroyAPIView):
-    queryset = Advice.objects.all()
-    serializer_class = AdviceDeleteSerializer
+class NewsDeleteView(generics.DestroyAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsDeleteSerializer
     permission_classes = (ManagerPermission, )
     lookup_field = "slug"
 
