@@ -36,7 +36,7 @@ class BlogComment(DateMixin):
         return f'{self.blog} --- {self.user}'
 
 
-class Advice(DateMixin, SlugMixin):
+class News(DateMixin, SlugMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=Uploader.advice_image_uploader)
     title = models.CharField(max_length=350)
@@ -47,8 +47,8 @@ class Advice(DateMixin, SlugMixin):
 
     class Meta:
         ordering = ("-created_at",)
-        verbose_name = "Advice"
-        verbose_name_plural = "Advices"
+        verbose_name = "News"
+        verbose_name_plural = "News"
 
     def save(self, *args, **kwargs):
         if not self.slug:
