@@ -63,4 +63,20 @@ class Flight(DateMixin):
         return self.partnership.user
 
 
+class PartnershipApplication(DateMixin):
+    company_name = models.CharField(max_length=100)
+    industry = models.CharField(max_length=100)
+    partnership_method = models.CharField(max_length=100)
+    currency = models.CharField(max_length=20)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.company_name
+
+    class Meta:
+        ordering = ('-created_at', )
+        verbose_name = 'Partnership Application'
+        verbose_name_plural = 'Partnership Applications'
+
+
 

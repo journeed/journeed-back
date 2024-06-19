@@ -23,5 +23,25 @@ class Uploader:
         return f"story/{instance.user.full_name}/{filename}"
 
     @staticmethod
+    def blog_image_uploader(instance, filename):
+        return f"blog/{instance.user.full_name}/{filename}"
+
+    @staticmethod
+    def advice_image_uploader(instance, filename):
+        return f"advice/{instance.user.full_name}/{filename}"
+
+    @staticmethod
+    def gallery_image_uploader(instance, filename):
+        return f"gallery/{filename}"
+
+    @staticmethod
+    def pastime_photo_uploader(instance, filename):
+        return f"pastime-type/{filename}"
+
+    @staticmethod
     def partnership_photo_uploader(instance, filename):
         return f"partnership/{instance.user}/{filename}"
+
+    @staticmethod
+    def partnership_type_photo_uploader(instance, filename):
+        return f"partnership-type/{instance.title}/{filename}"

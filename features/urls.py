@@ -5,6 +5,7 @@ urlpatterns = [
     # Story
     path('story-list/', views.StoryListView.as_view(), name='story-list'),
     path('story-create/', views.StoryCreateView.as_view(), name='story-create'),
+    path('story-update/<int:id>/', views.StoryUpdateView.as_view(), name='story-update'),
     path('story-detail/<int:id>/', views.StoryDetailView.as_view(), name='story-detail'),
     path('story-delete/<int:id>/', views.StoryDeleteView.as_view(), name='story-delete'),
 

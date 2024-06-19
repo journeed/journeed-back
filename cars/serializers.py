@@ -163,7 +163,7 @@ class CarCreateSerializer(serializers.ModelSerializer):
             setattr(instance, attr, value)
         instance.save()
 
-        images = self.context.get("data").getlist("images")  # request'ten resimleri al
+        images = self.context.get("data").getlist("images")  # get images
         for image in images:
             CarImage.objects.create(car=instance, image=image)
 

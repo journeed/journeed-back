@@ -1,9 +1,11 @@
 from rest_framework import serializers
 import re
 import pathlib
-from .models import HomeInfo, AboutInfo, DifferentInfo, SocialMedia, ContactInfo, Contact
+from .models import *
 from services.validate import validate_photo
 
+
+# Home Page Info
 
 class HomeInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -59,6 +61,8 @@ class HomeInfoDeleteSerializer(serializers.ModelSerializer):
         model = HomeInfo
         fields = ("id", )
 
+
+# About Page Info
 
 class AboutInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -124,6 +128,8 @@ class DifferentInfoDeleteSerializer(serializers.ModelSerializer):
         fields = ("id", )
 
 
+# Social Media Info
+
 class SocialMediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialMedia
@@ -148,6 +154,8 @@ class SocialMediaDeleteSerializer(serializers.ModelSerializer):
         fields = ("id", )
 
 
+# Contact Page Info
+
 class ContactInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactInfo
@@ -171,6 +179,8 @@ class ContactInfoDeleteSerializer(serializers.ModelSerializer):
         model = ContactInfo
         fields = ("id", )
 
+
+# Contact
 
 class ContactListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -198,4 +208,104 @@ class ContactDeleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = ("id", )
+
+
+# Partnership Page Info
+
+class PartnershipFeatureInfoListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipFeatureInfo
+        fields = "__all__"
+
+
+class PartnershipFeatureInfoCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipFeatureInfo
+        fields = ("title", "text")
+
+
+class PartnershipFeatureInfoUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipFeatureInfo
+        fields = ("title", "text")
+
+
+class PartnershipFeatureInfoDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipFeatureInfo
+        fields = ("id", )
+
+
+class PartnershipTypeInfoListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipTypeInfo
+        fields = "__all__"
+
+
+class PartnershipTypeInfoCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipTypeInfo
+        fields = ("title", "international", "domestic", "image")
+
+
+class PartnershipTypeInfoUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipTypeInfo
+        fields = ("title", "international", "domestic", "image")
+
+
+class PartnershipTypeInfoDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipTypeInfo
+        fields = ("id", )
+
+
+class PartnershipCommissionInfoListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipCommissionInfo
+        fields = "__all__"
+
+
+class PartnershipCommissionInfoCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipCommissionInfo
+        fields = ("title", "text")
+
+
+class PartnershipCommissionInfoUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipCommissionInfo
+        fields = ("title", "text")
+
+
+class PartnershipCommissionInfoDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipCommissionInfo
+        fields = ("id", )
+
+
+class PartnershipFaqInfoListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipFaqInfo
+        fields = "__all__"
+
+
+class PartnershipFaqInfoCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipFaqInfo
+        fields = ("title", "text")
+
+
+class PartnershipFaqInfoUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipFaqInfo
+        fields = ("title", "text")
+
+
+class PartnershipFaqInfoDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipFaqInfo
+        fields = ("id", )
+
+
 

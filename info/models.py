@@ -4,6 +4,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 from services.uploader import Uploader
 
 
+# Home Page Info
+
 class HomeInfo(DateMixin):
     head = models.CharField(max_length=200)
     first_content = models.TextField(null=True, blank=True)
@@ -20,6 +22,8 @@ class HomeInfo(DateMixin):
         # preventing the creation of a second object
         self.__class__.objects.exclude(id=self.id).delete()
 
+
+# About Page Info
 
 class AboutInfo(DateMixin):
     slogan = models.CharField(max_length=300)
@@ -44,6 +48,8 @@ class DifferentInfo(DateMixin):
         return 'About Different'
 
 
+# Social Media Info
+
 class SocialMedia(DateMixin):
     name = models.CharField(max_length=100)
     url = models.URLField()
@@ -51,6 +57,8 @@ class SocialMedia(DateMixin):
     def __str__(self):
         return self.name
 
+
+# Contact Page Info
 
 class ContactInfo(DateMixin):
     mobile = PhoneNumberField()
@@ -67,6 +75,8 @@ class ContactInfo(DateMixin):
         self.__class__.objects.exclude(id=self.id).delete()
 
 
+# Contact
+
 class Contact(DateMixin):
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -81,5 +91,62 @@ class Contact(DateMixin):
         ordering = ('-created_at', )
         verbose_name = 'Contact'
         verbose_name_plural = 'Contacts'
+
+
+# Partnership Page Info
+
+class PartnershipFeatureInfo(DateMixin):
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-created_at', )
+        verbose_name = 'Partnership Feature'
+        verbose_name_plural = 'Partnership Features'
+
+
+class PartnershipTypeInfo(DateMixin):
+    title = models.CharField(max_length=50)
+    international = models.FloatField()
+    domestic = models.FloatField()
+    image = models.ImageField(upload_to=Uploader.partnership_type_photo_uploader)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-created_at', )
+        verbose_name = 'Partnership Type'
+        verbose_name_plural = 'Partnership Types'
+
+
+class PartnershipCommissionInfo(DateMixin):
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-created_at', )
+        verbose_name = 'Partnership Commission'
+        verbose_name_plural = 'Partnership Commissions'
+
+
+class PartnershipFaqInfo(DateMixin):
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-created_at', )
+        verbose_name = 'Partnership Faq'
+        verbose_name_plural = 'Partnership Faq'
+
 
 

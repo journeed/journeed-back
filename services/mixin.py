@@ -11,7 +11,6 @@ class DateMixin(models.Model):
 
 class SlugMixin(models.Model):
     slug = models.SlugField(unique=True, editable=False)
-    code = models.SlugField(unique=True, editable=False)
 
     class Meta:
         abstract = True
