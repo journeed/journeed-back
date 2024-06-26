@@ -78,6 +78,7 @@ class CarListSerializer(serializers.ModelSerializer):
     total_price = serializers.FloatField(read_only=True)
     steering = SteeringSerializer(read_only=True)
     type_car = CarCategorySerializer(read_only=True)
+    rating = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Car
@@ -90,6 +91,8 @@ class CarListSerializer(serializers.ModelSerializer):
             "person_count",
             "price",
             "total_price",
+            "rating",
+            "view_count",
         )
 
     def get_image(self, obj):
@@ -115,6 +118,7 @@ class CarDetailSerializer(serializers.ModelSerializer):
             "fuel",
             "price",
             "total_price",
+            "view_count",
         )
 
     def to_representation(self, instance):

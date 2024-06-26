@@ -53,6 +53,7 @@ class Car(NameAbstract):
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
     fuel = models.ForeignKey(Fuel, on_delete=models.CASCADE)
+    view_count = models.PositiveIntegerField(default=0)
     fuel_volume = models.IntegerField()
 
     def __str__(self):

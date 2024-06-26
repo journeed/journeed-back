@@ -7,6 +7,37 @@ from .serializers import *
 from services.permission import ManagerPermission, ObjectPermission
 
 
+class TagListView(generics.ListAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagListSerializer
+
+
+class TagCreateView(generics.CreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagCreateSerializer
+    permission_classes = (ManagerPermission, )
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+
+class TagUpdateView(generics.UpdateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagUpdateSerializer
+    permission_classes = (ManagerPermission, )
+    lookup_field = "id"
+
+    def perform_update(self, serializer):
+        return serializer.save()
+
+
+class TagDeleteView(generics.DestroyAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagDeleteSerializer
+    permission_classes = (ManagerPermission, )
+    lookup_field = "id"
+
+
 class BlogListView(generics.ListAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogListSerializer
@@ -61,9 +92,6 @@ class BlogCommentListView(generics.ListAPIView):
     queryset = BlogComment.objects.all()
     serializer_class = BlogCommentListSerializer
 
-    def get_queryset(self):
-        BlogComment.objects
-
 
 class BlogCommentCreateView(generics.CreateAPIView):
     queryset = BlogComment.objects.all()
@@ -75,7 +103,6 @@ class BlogCommentCreateView(generics.CreateAPIView):
 
 
 class BlogCommentUpdateView(generics.UpdateAPIView):
-    queryset = BlogComment.objects.all()
     serializer_class = BlogCommentUpdateSerializer
     permission_classes = (IsAuthenticated, ObjectPermission)
     lookup_field = "id"
@@ -83,12 +110,17 @@ class BlogCommentUpdateView(generics.UpdateAPIView):
     def perform_update(self, serializer):
         return serializer.save(user=self.request.user)
 
+    def get_queryset(self):
+        return BlogComment.objects.filter(user=self.request.user)
+
 
 class BlogCommentDeleteView(generics.DestroyAPIView):
-    queryset = BlogComment.objects.all()
     serializer_class = BlogCommentDeleteSerializer
     permission_classes = (IsAuthenticated, ObjectPermission)
     lookup_field = "id"
+
+    def get_queryset(self):
+        return BlogComment.objects.filter(user=self.request.user)
 
 
 class NewsListView(generics.ListAPIView):
