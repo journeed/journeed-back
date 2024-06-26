@@ -4,6 +4,12 @@ from . import views
 app_name = "blog"
 
 urlpatterns = [
+    # tag
+    path('tag-list/', views.TagListView.as_view(), name='tag-list'),
+    path('tag-create/', views.TagCreateView.as_view(), name='tag-create'),
+    path('tag-update/<int:id>/', views.TagUpdateView.as_view(), name='tag-update'),
+    path('tag-delete/<int:id>/', views.TagDeleteView.as_view(), name='tag-delete'),
+
     # blog
     path('blog-list/', views.BlogListView.as_view(), name='blog-list'),
     path('blog-detail/<slug:slug>/', views.BlogDetailView.as_view(), name='blog-detail'),

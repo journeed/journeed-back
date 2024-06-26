@@ -10,7 +10,7 @@ urlpatterns = [
     path('home-update/<int:id>/', views.HomeInfoUpdateView.as_view(), name='home-update'),
     path('home-delete/<int:id>/', views.HomeInfoDeleteView.as_view(), name='home-delete'),
 
-    # special offer
+    # home special offer
     path('special-offer-list/', views.SpecialOfferListView.as_view(), name='special-offer-list'),
     path('special-offer-detail/<slug:slug>/', views.SpecialOfferDetailView.as_view(), name='special-offer-detail'),
     path('special-offer-create/', views.SpecialOfferCreateView.as_view(), name='special-offer-create'),

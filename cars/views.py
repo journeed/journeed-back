@@ -3,7 +3,7 @@ from .models import (
 )
 from rest_framework import generics
 from services.pagination import CarListPagination
-from django.db.models import F, FloatField
+from django.db.models import F, FloatField, Avg, IntegerField
 from django.db.models.functions import Coalesce
 from .serializers import (
     CarListSerializer, CarDetailSerializer, CarCategorySerializer, SteeringSerializer,
@@ -30,13 +30,28 @@ class FuelListView(generics.ListAPIView):
     serializer_class = FuelSerializer
 
 
-class CarListView(generics.ListAPIView):
-    queryset = Car.objects.annotate(
-        disc_prc=Coalesce(F("discount_price"), 0, output_field=FloatField()),
-        total_price=F("price")-F("disc_prc")
-    )
+class AnnotatedCarQuerysetMixin:
+    def get_queryset(self):
+        queryset = Car.objects.annotate(
+            disc_prc=Coalesce(F("discount_price"), 0, output_field=FloatField()),
+            total_price=F("price") - F("disc_prc"),
+            rating=Coalesce(Avg("carreview__rating"), 0, output_field=IntegerField())
+        )
+        return queryset
+
+
+class CarListView(AnnotatedCarQuerysetMixin, generics.ListAPIView):
     serializer_class = CarListSerializer
     pagination_class = CarListPagination
+
+
+class TrendCarsView(AnnotatedCarQuerysetMixin, generics.ListAPIView):
+    serializer_class = CarListSerializer
+    pagination_class = CarListPagination
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.order_by("-rating", "-view_count")[:6]
 
 
 class MyCarListView(generics.ListAPIView):
@@ -60,6 +75,13 @@ class CarDetailView(generics.RetrieveAPIView):
     ).all()
     serializer_class = CarDetailSerializer
     lookup_field = "id"
+
+    def get(self, request, *args, **kwargs):
+        car = self.get_object()
+        car.view_count += 1
+        car.save()
+
+        return super().get(request, *args, **kwargs)
 
 
 class CarCreateView(generics.CreateAPIView):

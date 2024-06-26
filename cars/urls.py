@@ -11,6 +11,7 @@ urlpatterns = [
     path("detail/<id>/", views.CarDetailView.as_view(), name="detail"),
 
     path("my/list/", views.MyCarListView.as_view(), name="my-cars-list"),
+    path("trend/cars/", views.TrendCarsView.as_view(), name="trend-cars"),
     path("create/", views.CarCreateView.as_view(), name="car-create"),
     path("edit/<id>/", views.CarEditView.as_view(), name="car-edit"),
     path("review/create/", views.CarReviewCreateView.as_view(), name="create-review"),

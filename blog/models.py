@@ -7,11 +7,19 @@ from services.uploader import Uploader
 User = get_user_model()
 
 
+class Tag(DateMixin):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Blog(DateMixin, SlugMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=Uploader.blog_image_uploader)
     title = models.CharField(max_length=350)
     content = models.TextField()
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return self.title
