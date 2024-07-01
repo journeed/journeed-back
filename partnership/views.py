@@ -37,6 +37,13 @@ class ApplicationCreateView(generics.CreateAPIView):
         return Response(status=201)
 
 
+class ApplicationUpdateView(generics.UpdateAPIView):
+    queryset = PartnershipApplication.objects.all()
+    serializer_class = ApplicationUpdateSerializer
+    permission_classes = (ManagerPermission, )
+    lookup_field = "id"
+
+
 class ApplicationDeleteView(generics.DestroyAPIView):
     queryset = PartnershipApplication.objects.all()
     serializer_class = ApplicationDeleteSerializer

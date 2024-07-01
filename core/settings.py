@@ -35,6 +35,7 @@ DEFAULT_APPS = [
 
 DJANGO_APPS = [
     'ads',
+    'basemodels',
     'blog',
     'cars',
     'features',
@@ -44,15 +45,16 @@ DJANGO_APPS = [
     'partnership',
     'payment',
     'restaurants',
+    'tours',
     'user',
 ]
 
 THIRD_PARTY_APPS = [
+    'django_cleanup.apps.CleanupConfig',
     'six',
     'rest_framework',
     'phonenumber_field',
     'django_countries',
-    'django_cleanup.apps.CleanupConfig',
 ]
 
 
@@ -165,7 +167,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
- 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -205,13 +206,13 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = 'user.User'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('HOST_USER')  # email address
-EMAIL_HOST_PASSWORD = os.environ.get('HOST_PASSWORD')  # email app password
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = False
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = os.environ.get('HOST_USER')  # email address
+# EMAIL_HOST_PASSWORD = os.environ.get('HOST_PASSWORD')  # email app password
+# EMAIL_PORT = os.environ.get('EMAIL_PORT')
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False

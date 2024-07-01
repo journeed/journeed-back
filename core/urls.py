@@ -3,12 +3,14 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("base-api/", include("basemodels.urls")),
     path("user-api/", include("user.urls")),
     path('info-api/', include('info.urls')),
     path('partnership-api/', include('partnership.urls')),
     path('blog-api/', include('blog.urls')),
     path('features-api/', include('features.urls')),
     path('cars-api/', include('cars.urls')),
+    path('tours-api/', include('tours.urls')),
 ]
 
 from django.conf import settings

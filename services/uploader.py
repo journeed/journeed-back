@@ -15,6 +15,10 @@ class Uploader:
         return f"special-offer/{instance.user.full_name}/{filename}"
 
     @staticmethod
+    def special_offer_tour_uploader(instance, filename):
+        return f"tour/{instance.user.name}/{filename}"
+
+    @staticmethod
     def car_image_uploader(instance, filename):
         return f"cars/{slugify(instance.car.name)}/{filename}"
 
@@ -49,3 +53,5 @@ class Uploader:
     @staticmethod
     def partnership_type_photo_uploader(instance, filename):
         return f"partnership-type/{instance.title}/{filename}"
+
+
