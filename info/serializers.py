@@ -63,68 +63,6 @@ class HomeInfoDeleteSerializer(serializers.ModelSerializer):
         fields = ("id", )
 
 
-class SpecialOfferListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SpecialOffer
-        fields = "__all__"
-
-
-class SpecialOfferCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SpecialOffer
-        fields = "__all__"
-        extra_kwargs = {
-            'user': {'read_only': True},
-        }
-
-    def validate(self, attrs):
-        image = attrs.get("image", None)
-
-        if image:
-            file_path = pathlib.Path(str(image)).suffix
-
-            if file_path not in ['.jpg', '.jpeg', '.png', '.heic']:
-                raise serializers.ValidationError({'error': 'You can only share photos`'})
-
-        return attrs
-
-
-class SpecialOfferUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SpecialOffer
-        fields = "__all__"
-        extra_kwargs = {
-            'user': {'read_only': True},
-        }
-
-    def validate(self, attrs):
-        image = attrs.get("image", None)
-
-        if image:
-            file_path = pathlib.Path(str(image)).suffix
-
-            if file_path not in ['.jpg', '.jpeg', '.png', '.heic']:
-                raise serializers.ValidationError({'error': 'You can only share photos`'})
-
-        return attrs
-
-    def update(self, instance, validated_data):
-        for attr, value in validated_data.items():
-            setattr(instance, attr, value)
-
-        instance.slug = unique_slug_generator(instance, old_slug=instance.slug)
-        instance.user = self.context.get('user')
-        instance.save()
-
-        return instance
-
-
-class SpecialOfferDeleteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SpecialOffer
-        fields = ("id", )
-
-
 # About Page Info
 
 class AboutInfoSerializer(serializers.ModelSerializer):

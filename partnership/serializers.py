@@ -25,6 +25,12 @@ class ApplicationCreateSerializer(serializers.ModelSerializer):
         return attrs
 
 
+class ApplicationUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnershipApplication
+        fields = ("id", "is_confirm")
+
+
 class ApplicationDeleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipApplication

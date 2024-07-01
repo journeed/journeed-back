@@ -31,7 +31,7 @@ class Blog(DateMixin, SlugMixin):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = unique_slug_generator(self)
+            self.slug = unique_slug_generator(self, slug_name=self.title)
         super().save(*args, **kwargs)
 
 

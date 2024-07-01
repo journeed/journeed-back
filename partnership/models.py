@@ -63,10 +63,19 @@ class Flight(DateMixin):
         return self.partnership.user
 
 
+class TourOrganizer(DateMixin):
+    partnership = models.ForeignKey(Partnership, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.partnership.user.full_name
+
+
 class PartnershipApplication(DateMixin):
     company_name = models.CharField(max_length=100)
     industry = models.CharField(max_length=100)
     partnership_method = models.CharField(max_length=100)
+    is_confirm = models.BooleanField(blank=True, null=True)
     currency = models.CharField(max_length=20)
     message = models.TextField()
 

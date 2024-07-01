@@ -100,7 +100,7 @@ class BlogUpdateSerializer(serializers.ModelSerializer):
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
 
-        instance.slug = unique_slug_generator(instance, old_slug=instance.slug)
+        instance.slug = unique_slug_generator(instance, slug_name=instance.title, old_slug=instance.slug,)
         instance.user = self.context.get('user')
         instance.save()
 

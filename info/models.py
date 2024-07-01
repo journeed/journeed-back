@@ -27,26 +27,6 @@ class HomeInfo(DateMixin):
         self.__class__.objects.exclude(id=self.id).delete()
 
 
-class SpecialOffer(DateMixin, SlugMixin):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=Uploader.special_offer_image_uploader)
-    title = models.CharField(max_length=350)
-    content = models.TextField()
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        ordering = ("-created_at", )
-        verbose_name = "Special Offer"
-        verbose_name_plural = "Special Offers"
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = unique_slug_generator(self)
-        super().save(*args, **kwargs)
-
-
 # About Page Info
 
 class AboutInfo(DateMixin):
