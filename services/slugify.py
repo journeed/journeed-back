@@ -38,11 +38,12 @@ def unique_slug_generator(instance, slug_name, new_slug=None, old_slug=None, i=2
 
     Klass = instance.__class__
     qs_exists = Klass.objects.filter(slug=slug).exists() if old_slug is None else Klass.objects.exclude(slug=old_slug).filter(slug=slug).exists()
+
     if qs_exists:
         new_slug = "{slug}-{randstr}".format(
             slug=custom_slugify(slug_name),
             randstr=i
         )
         a = i + 1
-        return unique_slug_generator(instance, new_slug=new_slug, i=a)
+        return unique_slug_generator(instance, slug_name=slug_name, new_slug=new_slug, i=a)
     return slug

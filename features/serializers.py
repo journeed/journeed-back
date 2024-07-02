@@ -2,6 +2,7 @@ from rest_framework import serializers
 import pathlib
 from django.contrib.auth import get_user_model
 from services.check_model import get_or_none
+from services.validate_file import validate_photo_and_video
 from .models import Story, StoryComment, StoryLike, StoryCommentLike
 
 Users = get_user_model()
@@ -25,11 +26,8 @@ class StoryCreateSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         file = attrs.get("file", None)
 
-        if file:
-            file_path = pathlib.Path(str(file)).suffix
-
-            if file_path not in ['.mkv', '.mp4', '.mov', '.jpg', '.jpeg', '.png', '.gif', '.heic']:
-                raise serializers.ValidationError({'error': 'You can only share photos and videos'})
+        if validate_photo_and_video(file) is False:
+            raise serializers.ValidationError({'error': 'You can only share photos and videos'})
 
         return attrs
 
