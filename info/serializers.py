@@ -2,7 +2,7 @@ from rest_framework import serializers
 import re
 import pathlib
 from .models import *
-from services.validate import validate_photo
+from services.validate_file import validate_photo
 from services.slugify import unique_slug_generator
 
 

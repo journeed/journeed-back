@@ -11,7 +11,7 @@ from .serializers import (
     CarReviewEditSerializer
 )
 from rest_framework.permissions import IsAuthenticated
-from services.permission import CarsPermission, CarReviewPermission
+from services.permission import CarsPermission
 from rest_framework.response import Response
 
 
@@ -134,10 +134,16 @@ class CarReviewCreateView(generics.CreateAPIView):
 
 class CarReviewEditView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CarReviewEditSerializer
-    permission_classes = (IsAuthenticated, CarReviewPermission)
+    permission_classes = (IsAuthenticated)
     lookup_field = "id"
 
     def get_queryset(self):
         return CarReview.objects.filter(user=self.request.user)
+
+    def perform_update(self, serializer):
+        return serializer.save(user=self.request.user)
+
+    def perform_destroy(self, instance):
+        return instance.delete(user=request.user)
 
 

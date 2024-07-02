@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from partnership.models import RentCar
+from partnership.models import RentCar, TourOrganizer
 
 
 class ManagerPermission(permissions.BasePermission):
@@ -32,17 +32,24 @@ class ObjectPermission(permissions.BasePermission):
 
 class CarsPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        if RentCar.objects.filter(user=request.user):
+        if RentCar.objects.filter(partnership__user=request.user):
             return True
         return request.user.is_partnership
 
     def has_object_permission(self, request, view, obj):
-        if RentCar.objects.filter(user=request.user):
+        if RentCar.objects.filter(partnership__user=request.user):
             return True
-        return obj.user == request.user
+        return obj.user.parnership.user == request.user
 
 
-class CarReviewPermission(permissions.BasePermission):
+class ToursPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if TourOrganizer.objects.filter(partnership__user=request.user):
+            return True
+        return request.user.is_partnership
+
     def has_object_permission(self, request, view, obj):
-        return obj.user == request.user
+        if TourOrganizer.objects.filter(partnership__user=request.user):
+            return True
+        return obj.user.parnership.user == request.user
 

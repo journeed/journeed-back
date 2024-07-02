@@ -86,6 +86,8 @@ class CarReview(DateMixin):
         return self.user.email
 
     class Meta:
+        unique_together = ('car', 'user')
+        ordering = ("-created_at", )
         verbose_name = "review"
         verbose_name_plural = "Car reviews"
 
