@@ -21,7 +21,10 @@ class StoryCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Story
-        fields = ("file", "id")
+        fields = ("id", "user", "status", "file")
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
 
     def validate(self, attrs):
         file = attrs.get("file", None)
@@ -35,7 +38,10 @@ class StoryCreateSerializer(serializers.ModelSerializer):
 class StoryUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Story
-        fields = ("status", )
+        fields = ("id", "user", "status", )
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
 
 
 class StoryDetailSerializer(serializers.ModelSerializer):
@@ -69,13 +75,19 @@ class StoryCommentListSerializer(serializers.ModelSerializer):
 class StoryCommentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = StoryComment
-        fields = ("story", "comment", )
+        fields = ("id", "user", "story", "comment", )
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
 
 
 class StoryCommentUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = StoryComment
-        fields = ("comment", )
+        fields = ("id", "user", "comment", )
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
 
 
 class StoryCommentDeleteSerializer(serializers.ModelSerializer):
@@ -95,15 +107,21 @@ class StoryLikeListSerializer(serializers.ModelSerializer):
 class StoryLikeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = StoryLike
-        fields = ("story", )
+        fields = ("id", "story", "user")
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
 
     def create(self, validated_data):
         story, created = StoryLike.objects.get_or_create(**validated_data)
 
-        if not created:
-            story.delete()
-
         return story
+
+
+class StoryLikeDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StoryLike
+        fields = ("id", )
 
 
 # Story Comment Like
@@ -117,12 +135,18 @@ class StoryCommentLikeListSerializer(serializers.ModelSerializer):
 class StoryCommentLikeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = StoryCommentLike
-        fields = ("story_comment", )
+        fields = ("id", "story_comment", "user")
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
 
     def create(self, validated_data):
         story_comment, created = StoryCommentLike.objects.get_or_create(**validated_data)
 
-        if not created:
-            story_comment.delete()
-
         return story_comment
+
+
+class StoryCommentLikeDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StoryCommentLike
+        fields = ("id", )

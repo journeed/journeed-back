@@ -89,8 +89,10 @@ class TourReviewUpdateView(generics.UpdateAPIView):
 
 
 class TourReviewDeleteView(generics.DestroyAPIView):
-    queryset = TourReview.objects.all()
     serializer_class = TourReviewDeleteSerializer
     permission_classes = (IsAuthenticated, ObjectPermission)
     lookup_field = "id"
+
+    def get_queryset(self):
+        return TourReview.objects.filter(user=self.request.user)
 

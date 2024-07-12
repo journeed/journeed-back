@@ -117,9 +117,13 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # creating a new user and storing the password encrypted
         password_confirm = validated_data.pop("password_confirm")
+
         user = User.objects.create(**validated_data)
         user.set_password(password_confirm)
         user.save()
+
+        Profile.objects.create(user=user)
+
         return user
 
     def to_representation(self, instance):
@@ -314,11 +318,19 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         return repr_
 
 
+class CoreUserInfo(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("id", "email", "full_name", "mobile", "country", "is_partnership")
+
+
 class ProfileSerializer(serializers.ModelSerializer):
+    user = CoreUserInfo(read_only=True)
 
     class Meta:
         model = Profile
         fields = (
+            "user",
             "profile_photo",
             "birth_day",
             "bio"
@@ -333,8 +345,3 @@ class ProfileSerializer(serializers.ModelSerializer):
             if photo_path not in [".jpg", ".jpeg", ".png"]:
                 raise serializers.ValidationError({"error": "Yüklədiyiniz şəkil formati dəstəklənmir."})
         return attrs
-
-
-
-
-

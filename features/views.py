@@ -60,8 +60,11 @@ class StoryDeleteView(generics.DestroyAPIView):
 # Story Comment
 
 class StoryCommentListView(generics.ListAPIView):
-    queryset = StoryComment.objects.all()
     serializer_class = StoryCommentListSerializer
+    lookup_field = "story"
+
+    def get_queryset(self):
+        return StoryComment.objects.filter(story=self.kwargs.get("story"))
 
 
 class StoryCommentCreateView(generics.CreateAPIView):
@@ -93,8 +96,11 @@ class StoryCommentDeleteView(generics.DestroyAPIView):
 # Story like
 
 class StoryLikeListView(generics.ListAPIView):
-    queryset = StoryLike.objects.all()
     serializer_class = StoryLikeListSerializer
+    lookup_field = "story"
+
+    def get_queryset(self):
+        return StoryLike.objects.filter(story=self.kwargs.get("story"))
 
 
 class StoryLikeCreateView(generics.CreateAPIView):
@@ -106,11 +112,21 @@ class StoryLikeCreateView(generics.CreateAPIView):
         return serializer.save(user=self.request.user)
 
 
+class StoryLikeDeleteView(generics.DestroyAPIView):
+    queryset = StoryLike.objects.all()
+    serializer_class = StoryLikeDeleteSerializer
+    permission_classes = (IsAuthenticated, ObjectPermission)
+    lookup_field = "story"
+
+
 # Story Comment Like
 
 class StoryCommentLikeListView(generics.ListAPIView):
-    queryset = StoryCommentLike.objects.all()
     serializer_class = StoryCommentLikeListSerializer
+    lookup_field = "story_comment"
+
+    def get_queryset(self):
+        return StoryCommentLike.objects.filter(story_comment=self.kwargs.get("story_comment"))
 
 
 class StoryCommentLikeCreateView(generics.CreateAPIView):
@@ -120,5 +136,12 @@ class StoryCommentLikeCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
+
+
+class StoryCommentLikeDeleteView(generics.DestroyAPIView):
+    queryset = StoryCommentLike.objects.all()
+    serializer_class = StoryCommentLikeCreateSerializer
+    permission_classes = (IsAuthenticated, ObjectPermission)
+    lookup_field = "id"
 
 
