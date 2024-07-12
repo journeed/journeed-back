@@ -10,15 +10,17 @@ urlpatterns = [
     path('story-delete/<int:id>/', views.StoryDeleteView.as_view(), name='story-delete'),
 
     # Story Comment
-    path('story-comment-list/', views.StoryCommentListView.as_view(), name='story-comment-list'),
+    path('story-comment-list/<int:story>/', views.StoryCommentListView.as_view(), name='story-comment-list'),
     path('story-comment-create/', views.StoryCommentCreateView.as_view(), name='story-comment-create'),
     path('story-comment-update/<int:id>/', views.StoryCommentUpdateView.as_view(), name='story-comment-update'),
     path('story-comment-delete/<int:id>/', views.StoryCommentDeleteView.as_view(), name='story-comment-delete'),
 
     # Like
-    path('story-like-list/', views.StoryLikeListView.as_view(), name='story-comment-like'),
+    path('story-like-list/<int:story>/', views.StoryLikeListView.as_view(), name='story-comment-like'),
     path('story-like-create/', views.StoryLikeCreateView.as_view(), name='story-like-create'),
-    path('story-comment-like-list/', views.StoryCommentLikeListView.as_view(), name='story-comment-like'),
+    path('story-like-delete/<int:story>/', views.StoryLikeDeleteView.as_view(), name='story-like-delete'),
+    path('story-comment-like-list/<int:story_comment>/', views.StoryCommentLikeListView.as_view(), name='story-comment-like'),
     path('story-comment-like-create/', views.StoryCommentLikeCreateView.as_view(), name='story-comment-like-create'),
+    path('story-comment-like-delete/<int:id>/', views.StoryCommentLikeDeleteView.as_view(), name='story-comment-like-delete'),
 ]
 
