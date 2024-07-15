@@ -17,7 +17,7 @@ class HomeInfoSerializer(serializers.ModelSerializer):
 class HomeInfoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = HomeInfo
-        fields = ("head", "first_content", "second_content", "home_background",
+        fields = ("id", "head", "first_content", "second_content", "home_background",
                   "home_banner", "home_banner_background")
 
         @staticmethod
@@ -43,7 +43,7 @@ class HomeInfoCreateSerializer(serializers.ModelSerializer):
 class HomeInfoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = HomeInfo
-        fields = ("head", "first_content", "second_content", "home_background",
+        fields = ("id", "head", "first_content", "second_content", "home_background",
                   "home_banner", "home_banner_background")
 
     def validate(self, attrs):
@@ -74,7 +74,7 @@ class AboutInfoSerializer(serializers.ModelSerializer):
 class AboutInfoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = AboutInfo
-        fields = ("slogan", "head", "background", "first_content", "second_content")
+        fields = ("id", "slogan", "head", "background", "first_content", "second_content")
 
     def validate(self, attrs):
         background = attrs.get("background")
@@ -88,7 +88,7 @@ class AboutInfoCreateSerializer(serializers.ModelSerializer):
 class AboutInfoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = AboutInfo
-        fields = ("slogan", "head", "background", "first_content", "second_content")
+        fields = ("id", "slogan", "head", "background", "first_content", "second_content")
 
     def validate(self, attrs):
         background = attrs.get("background")
@@ -114,13 +114,13 @@ class DifferentInfoSerializer(serializers.ModelSerializer):
 class DifferentInfoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = DifferentInfo
-        fields = ("head", "content")
+        fields = ("id", "head", "content")
 
 
 class DifferentInfoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = DifferentInfo
-        fields = ("head", "content")
+        fields = ("id", "head", "content")
 
 
 class DifferentInfoDeleteSerializer(serializers.ModelSerializer):
@@ -140,13 +140,13 @@ class SocialMediaSerializer(serializers.ModelSerializer):
 class SocialMediaCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialMedia
-        fields = ("name", "url")
+        fields = ("id", "name", "url")
 
 
 class SocialMediaUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialMedia
-        fields = ("name", "url")
+        fields = ("id", "name", "url")
 
 
 class SocialMediaDeleteSerializer(serializers.ModelSerializer):
@@ -166,13 +166,13 @@ class ContactInfoSerializer(serializers.ModelSerializer):
 class ContactInfoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactInfo
-        fields = ("mobile", "mail", "work_time", "social_media", "map")
+        fields = ("id", "mobile", "mail", "work_time", "social_media", "map")
 
 
 class ContactInfoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactInfo
-        fields = ("mobile", "mail", "work_time", "social_media", "map")
+        fields = ("id", "mobile", "mail", "work_time", "social_media", "map")
 
 
 class ContactInfoDeleteSerializer(serializers.ModelSerializer):
@@ -192,7 +192,7 @@ class ContactListSerializer(serializers.ModelSerializer):
 class ContactCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = ("name", "email", "phone", "request_type", "message", )
+        fields = ("id", "name", "email", "phone", "request_type", "message", )
 
     def validate(self, attrs):
         name = attrs.get('name')
@@ -222,13 +222,13 @@ class PartnershipFeatureInfoListSerializer(serializers.ModelSerializer):
 class PartnershipFeatureInfoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipFeatureInfo
-        fields = ("title", "text")
+        fields = ("id", "title", "text")
 
 
 class PartnershipFeatureInfoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipFeatureInfo
-        fields = ("title", "text")
+        fields = ("id", "title", "text")
 
 
 class PartnershipFeatureInfoDeleteSerializer(serializers.ModelSerializer):
@@ -246,13 +246,13 @@ class PartnershipTypeInfoListSerializer(serializers.ModelSerializer):
 class PartnershipTypeInfoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipTypeInfo
-        fields = ("title", "international", "domestic", "image")
+        fields = ("id", "title", "international", "domestic", "image")
 
 
 class PartnershipTypeInfoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipTypeInfo
-        fields = ("title", "international", "domestic", "image")
+        fields = ("id", "title", "international", "domestic", "image")
 
 
 class PartnershipTypeInfoDeleteSerializer(serializers.ModelSerializer):
@@ -270,13 +270,13 @@ class PartnershipCommissionInfoListSerializer(serializers.ModelSerializer):
 class PartnershipCommissionInfoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipCommissionInfo
-        fields = ("title", "text")
+        fields = ("id", "title", "text")
 
 
 class PartnershipCommissionInfoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipCommissionInfo
-        fields = ("title", "text")
+        fields = ("id", "title", "text")
 
 
 class PartnershipCommissionInfoDeleteSerializer(serializers.ModelSerializer):
@@ -294,13 +294,13 @@ class PartnershipFaqInfoListSerializer(serializers.ModelSerializer):
 class PartnershipFaqInfoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipFaqInfo
-        fields = ("title", "text")
+        fields = ("id", "title", "text")
 
 
 class PartnershipFaqInfoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipFaqInfo
-        fields = ("title", "text")
+        fields = ("id", "title", "text")
 
 
 class PartnershipFaqInfoDeleteSerializer(serializers.ModelSerializer):

@@ -1,6 +1,7 @@
 from django.db import models
 from services.choices import RATING
-from services.mixin import DateMixin
+from services.slugify import unique_slug_generator
+from services.mixin import DateMixin, SlugMixin
 from services.uploader import Uploader
 from django.contrib.auth import get_user_model
 
@@ -44,7 +45,7 @@ class Fuel(NameAbstract):
         verbose_name_plural = "Car fuels"
 
 
-class Car(NameAbstract):
+class Car(NameAbstract, SlugMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={"is_partnership": True})
     type_car = models.ForeignKey(CarCategory, on_delete=models.CASCADE)
     description = models.TextField()
@@ -62,6 +63,11 @@ class Car(NameAbstract):
     class Meta:
         verbose_name = "car"
         verbose_name_plural = "Cars"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug_generator(self, slug_name=self.name)
+        super().save(*args, **kwargs)
 
 
 class CarImage(DateMixin):

@@ -8,6 +8,7 @@ class CarImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarImage
         fields = (
+            "id",
             "car_image_id",
             "image"
         )
@@ -68,6 +69,7 @@ class CarReviewEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarReview
         fields = (
+            "id",
             "content",
             "rating"
         )
@@ -136,10 +138,10 @@ class CarDetailSerializer(serializers.ModelSerializer):
 
 
 class CarCreateSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Car
         fields = (
+            "id",
             "name",
             "description",
             "type_car",

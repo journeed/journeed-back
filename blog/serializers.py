@@ -41,7 +41,7 @@ class BlogCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ("slug", "user", "image", "title", "content", "tags", "image_base64")
+        fields = ("id", "slug", "user", "image", "title", "content", "tags", "image_base64")
         extra_kwargs = {
             'user': {'read_only': True},
             'image': {'read_only': True},
@@ -78,7 +78,7 @@ class BlogUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ("slug", "user", "image", "title", "content", "tags", "image_base64")
+        fields = ("id", "slug", "user", "image", "title", "content", "tags", "image_base64")
         extra_kwargs = {
             'user': {'read_only': True},
             'image': {'read_only': True},

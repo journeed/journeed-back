@@ -12,7 +12,7 @@ class ApplicationListSerializer(serializers.ModelSerializer):
 class ApplicationCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnershipApplication
-        fields = ("company_name", "industry", "partnership_method", "currency", "message", )
+        fields = ("id", "company_name", "industry", "partnership_method", "currency", "message", )
 
     def validate(self, attrs):
         company_name = attrs.get('company_name')
