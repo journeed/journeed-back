@@ -117,6 +117,19 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # creating a new user and storing the password encrypted
         password_confirm = validated_data.pop("password_confirm")
+        user = User.objects.create(
+            **validated_data,
+            is_active=False,
+            activation_code=CodeGenerator().create_user_activation_code(size=6, model_=User)
+        )
+        # Activation mail
+        send_mail(
+            "Jour Need",
+            f"Your activation code: {user.activation_code}",
+            settings.EMAIL_HOST_USER,
+            [user.email],
+            fail_silently=True
+        )
         user = User.objects.create(**validated_data)
         user.set_password(password_confirm)
         user.save()
